@@ -2,7 +2,28 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-require('dotenv').config()
+const Sequelize = require('sequelize');
+require('dotenv').config();
+var config = require('./config/config')
+
+var sequelize = new Sequelize(
+  config.development.database,
+  config.development.username,
+  config.development.password,
+  {
+    host: config.development.host,
+    dialect: 'postgres'
+  }
+)
+
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

@@ -9,16 +9,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       title: {
-        type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        type: Sequelize.STRING
       },
       isbn: {
+        allowNull: false,
         type: Sequelize.STRING,
-        allowNull: false
       },
       resume: {
-        type: Sequelize.TEXT,
-        allowNull: true
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
@@ -28,7 +27,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    }).then(() => queryInterface.addIndex('Books', ['title', 'isbn']));
+    })
+    .then(() => queryInterface.addIndex('Books', ['title']))
+    .then(() => queryInterface.addIndex('Books', ['isbn']));
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Books');

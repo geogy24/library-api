@@ -4,20 +4,17 @@ module.exports = (sequelize, DataTypes) => {
     title: {
       type: DataTypes.STRING,
       validate: {
-        notNull: true
+        allowNull: true
       }
     },
     isbn: {
       type: DataTypes.STRING,
       validate: {
-        notNull: true
+        allowNull: true
       }
     },
     resume: {
-      type: DataTypes.TEXT,
-      validate: {
-        notNull: false
-      }
+      type: DataTypes.TEXT
     }
   }, {});
   Book.associate = function(models) {

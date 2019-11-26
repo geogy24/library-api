@@ -16,17 +16,8 @@ var sequelize = new Sequelize(
   }
 )
 
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully.');
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
-
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var booksRouter = require('./routes/books');
 
 var app = express();
 
@@ -37,6 +28,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/books', booksRouter);
 
 module.exports = app;

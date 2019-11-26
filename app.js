@@ -3,18 +3,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const Sequelize = require('sequelize');
-require('dotenv').config();
-var config = require('./config/config')
-
-var sequelize = new Sequelize(
-  config.development.database,
-  config.development.username,
-  config.development.password,
-  {
-    host: config.development.host,
-    dialect: 'postgres'
-  }
-)
 
 var indexRouter = require('./routes/index');
 var booksRouter = require('./routes/books');

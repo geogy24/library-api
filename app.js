@@ -5,6 +5,7 @@ var logger = require( "morgan" );
 
 var indexRouter = require( "./routes/index" );
 var booksRouter = require( "./routes/books" );
+var subjectsRouter = require( "./routes/subjects" );
 
 var app = express(  );
 
@@ -16,5 +17,6 @@ app.use( express.static( path.join( __dirname, "public" ) ) );
 
 app.use( "/", indexRouter );
 app.use( "/books", booksRouter );
+app.use( "/subjects", subjectsRouter );
 
 module.exports = app;

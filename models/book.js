@@ -17,8 +17,9 @@ module.exports = ( sequelize, DataTypes ) => {
 			type: DataTypes.TEXT
 		}
 	}, {} );
-	Book.associate = function( ) {
+	Book.associate = function( models ) {
 		// associations can be defined here
+		Book.belongsTo( models.Subject );
 	};
 	return Book;
 };

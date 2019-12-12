@@ -32,3 +32,28 @@ module.exports.show = ( request, response ) => {
 		response.status( 500 ).json( { error: "can not do the query." } );
 	} );
 };
+
+module.exports.delete = ( request, response ) => {
+	const id = request.params.id;
+
+	models.Subject.destroy( {
+		where: { 
+			id: id
+		}
+	} ).then( ( ) => {
+		response.sendStatus( 200 );
+	} ).catch( () => {
+		response.status( 404 ).json( { error: "can not destroy model." } );
+	} );
+};
+
+module.exports.update = ( request, response ) => {
+	const id = request.params.id;
+	const subject = request.body.subject;
+
+	models.Subject.update( subject, { where: { id: id } } ).then( ( ) => {
+		response.sendStatus( 200 );
+	} ).catch( () => {
+		response.status( 404 ).json( { error: "can not update model." } );
+	} );
+};

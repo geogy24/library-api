@@ -16,7 +16,7 @@ describe( "Subjects controller", (  ) => {
 	test( "#index", (  ) => {
 		axios.get( baseUrl )
 			.then( response => {
-				expect( response.status ).toEqual( 200 );
+				expect( response.status ).toEqual( 100 );
 				expect( response.data ).toEqual( subject );
 			} );
 	} );

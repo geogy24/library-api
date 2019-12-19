@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "node ./node_modules/.bin/jest && exit 0"
+    "test": "node ./node_modules/.bin/jest",
+    "lint": "eslint -c .eslintrc.js ."
   },
   "pre-commit": [
-    "test"
+    "test",
+    "lint"
   ],
   "dependencies": {
     "axios": "^0.19.0",

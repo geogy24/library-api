@@ -13,11 +13,12 @@ describe( "Subjects controller", (  ) => {
 		nock( baseUrl ).get( "/subjects" ).reply( 200, subject );
 	} );
 
-	test( "#index", (  ) => {
-		axios.get( baseUrl )
-			.then( response => {
-				expect( response.status ).toEqual( 100 );
+	test( "#index", ( done ) => {
+		return axios.get( `${baseUrl}/subjects` )
+			.then( ( response ) => {
+				expect( response.status ).toEqual( 200 );
 				expect( response.data ).toEqual( subject );
+				done( );
 			} );
 	} );
 } );

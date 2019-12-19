@@ -15,12 +15,12 @@ describe( "Books controller", (  ) => {
 		nock( baseUrl ).get( "/books" ).reply( 200, book );
 	} );
 
-	test( "#index", (  ) => {
-		axios.get( baseUrl )
+	test( "#index", ( done ) => {
+		axios.get( `${baseUrl}/books` )
 			.then( response => {
 				expect( response.status ).toEqual( 200 );
 				expect( response.data ).toEqual( book );
-			} )
-			.catch(  );
+				done( );
+			} );
 	} );
 } );

@@ -12,7 +12,7 @@ let body;
 describe( "#index", (  ) => {
 	beforeEach( async (  ) => {
 		subject = await subjectFactory.create( "subject" );
-		response = await request( app ).get( "/v1/admin/subjects" );
+		response = await request( app ).get( "/v1/subjects" );
 		body = await new JSONAPIDeserializer().deserialize( response.body );
 	} );
 
@@ -29,7 +29,7 @@ describe( "#show", (  ) => {
 	describe( "when object exist", () => {
 		beforeEach( async (  ) => {
 			subject = await subjectFactory.create( "subject" );
-			response = await request( app ).get( `/v1/admin/subjects/${subject.dataValues.id}` );
+			response = await request( app ).get( `/v1/subjects/${subject.dataValues.id}` );
 			body = await new JSONAPIDeserializer().deserialize( response.body );
 		} );
 
@@ -42,7 +42,7 @@ describe( "#show", (  ) => {
 
 	describe( "when object doesn't exist", () => {
 		beforeEach( async (  ) => {
-			response = await request( app ).get( `/v1/admin/subjects/${faker.random.number( )}` );
+			response = await request( app ).get( `/v1/subjects/${faker.random.number( )}` );
 		} );
 
 		it( "response 404 not found", async () => {
@@ -53,7 +53,7 @@ describe( "#show", (  ) => {
 
 	describe( "when send invalid data", () => {
 		beforeEach( async (  ) => {
-			response = await request( app ).get( `/v1/admin/subjects/${faker.lorem.word(  )}` );
+			response = await request( app ).get( `/v1/subjects/${faker.lorem.word(  )}` );
 		} );
 
 		it( "response 500 error", async () => {
@@ -67,7 +67,7 @@ describe( "#delete", (  ) => {
 	describe( "when object exist", () => {
 		beforeEach( async (  ) => {
 			subject = await subjectFactory.create( "subject" );
-			response = await request( app ).delete( `/v1/admin/subjects/${subject.dataValues.id}` );
+			response = await request( app ).delete( `/v1/subjects/${subject.dataValues.id}` );
 		} );
 
 		it( "response 200 ok", async () => {
@@ -77,7 +77,7 @@ describe( "#delete", (  ) => {
 
 	describe( "when object doesn't exist", () => {
 		beforeEach( async (  ) => {
-			response = await request( app ).delete( `/v1/admin/subjects/${faker.lorem.word( )}` );
+			response = await request( app ).delete( `/v1/subjects/${faker.lorem.word( )}` );
 		} );
 
 		it( "response 404 not found", async () => {
@@ -91,7 +91,7 @@ describe( "#create", (  ) => {
 	describe( "when create subject", () => {
 		beforeEach( async (  ) => {
 			subject = await subjectFactory.build( "subject" );
-			response = await request( app ).post( "/v1/admin/subjects" ).send( { subject: subject.dataValues } );
+			response = await request( app ).post( "/v1/subjects" ).send( { subject: subject.dataValues } );
 			body = await new JSONAPIDeserializer().deserialize( response.body );
 		} );
 
@@ -104,7 +104,7 @@ describe( "#create", (  ) => {
 
 	describe( "when data is invalid", () => {
 		beforeEach( async (  ) => {
-			response = await request( app ).post( "/v1/admin/subjects" ).send( { subject: {} } );
+			response = await request( app ).post( "/v1/subjects" ).send( { subject: {} } );
 		} );
 
 		it( "response 500 error", async () => {
@@ -118,7 +118,7 @@ describe( "#update", (  ) => {
 	describe( "when create subject", () => {
 		beforeEach( async (  ) => {
 			subject = await subjectFactory.create( "subject" );
-			response = await request( app ).put(  `/v1/admin/subjects/${subject.dataValues.id}` ).send( { subject: faker.lorem.words() } );
+			response = await request( app ).put(  `/v1/subjects/${subject.dataValues.id}` ).send( { subject: faker.lorem.words() } );
 		} );
 
 		it( "response 200 ok", async () => {
@@ -128,7 +128,7 @@ describe( "#update", (  ) => {
 
 	describe( "when subject does not exist", () => {
 		beforeEach( async (  ) => {
-			response = await request( app ).put(  `/v1/admin/subjects/${faker.random.number()}` ).send( { subject: { name: "" } } );
+			response = await request( app ).put(  `/v1/subjects/${faker.random.number()}` ).send( { subject: { name: "" } } );
 		} );
 
 		it( "response 404 not found", async () => {

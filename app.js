@@ -27,7 +27,7 @@ v1.use( "/admin", admin );
 app.use( "/", indexRouter );
 app.use( "/books", booksRouter );
 v1.use( "/authors", authorsRouter );
-admin.use( "/subjects", subjectsRouter );
+v1.use( "/subjects", subjectsRouter );
 
 let options = {
 	swaggerDefinition: {

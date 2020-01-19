@@ -4,7 +4,7 @@ var subjectsController = require( "../controllers/subjects.controller" );
 
 /**
  * List subjects
- * @route GET /admin/subjects
+ * @route GET /subjects
  * @group Subject
  * @returns {object} 200 - An array of user info
  */
@@ -12,7 +12,7 @@ router.get( "/", subjectsController.index );
 
 /**
  * Deletes a subject
- * @route DELETE /admin/subjects/:id
+ * @route DELETE /subjects/:id
  * @group Subject
  * @param {string} id.query.required - Subject ID
  * @returns {object} 200
@@ -22,7 +22,7 @@ router.delete( "/:id", subjectsController.delete );
 
 /**
  * Show a required subject
- * @route GET /admin/subjects/:id
+ * @route GET /subjects/:id
  * @group Subject
  * @param {string} id.query.required - Subject ID
  * @returns {object} 200 - An object of user info
@@ -33,7 +33,7 @@ router.get( "/:id", subjectsController.show );
 
 /**
  * Update a subject
- * @route PUT /admin/subjects/:id
+ * @route PUT /subjects/:id
  * @group Subject
  * @param {string} id.query.required - Subject ID
  * @param {string} name.body.required - Name of the subject
@@ -44,7 +44,7 @@ router.put( "/:id", subjectsController.update );
 
 /**
  * Creates a subject of a book
- * @route POST /admin/subjects
+ * @route POST /subjects
  * @group Subject
  * @param {string} name.body.required - name
  * @returns {object} 200 - A subject object

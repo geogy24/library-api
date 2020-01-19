@@ -4,25 +4,46 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "jest"
+    "test": "cross-env NODE_ENV=test node ./node_modules/.bin/jest --testTimeout=10000",
+    "lint": "eslint -c .eslintrc.js .",
+    "migrate": "npx sequelize-cli db:migrate",
+    "migrate:reset": "npx sequelize-cli db:migrate:undo:all && npm run migrate",
+    "pretest": "cross-env NODE_ENV=test npm run migrate:reset"
   },
+  "pre-commit": [
+    "test",
+    "lint"
+  ],
   "dependencies": {
     "axios": "^0.19.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
+    "eslint-plugin-jest": "^23.1.1",
     "express": "^4.16.4",
+    "factory-girl": "^5.0.4",
     "jsonapi-serializer": "^3.6.5",
     "morgan": "~1.9.1",
     "pg": "^7.14.0",
     "pg-hstore": "^2.3.3",
+    "pretest": "^1.1.0",
     "sequelize": "^5.21.2",
     "sequelize-cli": "^5.5.1"
   },
   "devDependencies": {
+    "cross-env": "^6.0.3",
+    "cz-conventional-changelog": "^3.0.2",
     "eslint": "^6.7.2",
+    "express-swagger-generator": "^1.1.15",
     "faker": "^4.1.0",
     "jest": "^24.9.0",
-    "nock": "^11.7.0"
+    "nock": "^11.7.0",
+    "pre-commit": "^1.2.2",
+    "supertest": "^4.0.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

@@ -2,7 +2,7 @@ const nock = require( "nock" );
 const axios = require( "axios" );
 const faker = require( "faker" );
 
-const baseUrl = "http://localhost:3000"
+const baseUrl = "http://localhost:3000";
 
 describe( "Books controller", (  ) => {
 	const book = {
@@ -15,12 +15,12 @@ describe( "Books controller", (  ) => {
 		nock( baseUrl ).get( "/books" ).reply( 200, book );
 	} );
 
-	test( "#index", (  ) => {
-		axios.get( baseUrl )
+	test( "#index", ( done ) => {
+		axios.get( `${baseUrl}/books` )
 			.then( response => {
 				expect( response.status ).toEqual( 200 );
 				expect( response.data ).toEqual( book );
-			} )
-			.catch(  );
+				done( );
+			} );
 	} );
 } );

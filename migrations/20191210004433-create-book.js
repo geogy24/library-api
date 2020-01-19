@@ -26,7 +26,17 @@ module.exports = {
 			updatedAt: {
 				allowNull: false,
 				type: Sequelize.DATE
-			}
+			},
+			subjectId: {
+				type: Sequelize.INTEGER,
+				references: {
+					model: {
+						tableName: "Subjects",
+						key: "id"
+					}
+				},
+				allowNull: false
+			},
 		} )
 			.then( () => queryInterface.addIndex( "Books", [ "title" ] ) )
 			.then( () => queryInterface.addIndex( "Books", [ "isbn" ] ) );

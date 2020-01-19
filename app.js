@@ -6,6 +6,7 @@ var logger = require( "morgan" );
 var indexRouter = require( "./routes/index" );
 var booksRouter = require( "./routes/books" );
 var subjectsRouter = require( "./routes/subjects" );
+var authorsRouter = require( "./routes/authors" );
 
 var app = express(  );
 
@@ -25,6 +26,7 @@ v1.use( "/admin", admin );
 
 app.use( "/", indexRouter );
 app.use( "/books", booksRouter );
+v1.use( "/authors", authorsRouter );
 admin.use( "/subjects", subjectsRouter );
 
 let options = {

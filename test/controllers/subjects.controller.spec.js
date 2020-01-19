@@ -128,7 +128,7 @@ describe( "#update", (  ) => {
 
 	describe( "when subject does not exist", () => {
 		beforeEach( async (  ) => {
-			response = await request( app ).put(  `/v1/admin/subjects/${faker.random.number()}` ).send( { subject: { name: ""} } );
+			response = await request( app ).put(  `/v1/admin/subjects/${faker.random.number()}` ).send( { subject: { name: "" } } );
 		} );
 
 		it( "response 404 not found", async () => {

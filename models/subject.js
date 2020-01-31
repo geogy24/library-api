@@ -5,7 +5,7 @@ module.exports =  ( sequelize, DataTypes ) => {
 	}, {} );
 	Subject.associate = function( models ) {
 		// associations can be defined here
-		Subject.hasMany( models.Book );
+		Subject.hasMany( models.Book, {  foreignKey: "subjectId",  targetKey: "id" } );
 	};
 	return Subject;
 };

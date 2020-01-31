@@ -5,7 +5,13 @@ module.exports =  ( sequelize, DataTypes ) => {
 	}, {} );
 	Author.associate = function( models ) {
 		// associations can be defined here
-		Author.hasMany( models.Book );
+		Author.belongsToMany( models.Book, {
+			through: {
+				model: models.AuthorBook
+			},
+			foreignKey: "authorId",
+			constraints: false
+		} );
 	};
 	return Author;
 };

@@ -21,11 +21,11 @@ app.use( express.static( path.join( __dirname, "public" ) ) );
 var v1 = express.Router();
 app.use( "/v1", v1 );
 
-var admin = express.Router();
-v1.use( "/admin", admin );
+var user = express.Router();
+v1.use( "/admin", user );
 
 app.use( "/", indexRouter );
-app.use( "/books", booksRouter );
+v1.use( "/books", booksRouter );
 v1.use( "/authors", authorsRouter );
 v1.use( "/subjects", subjectsRouter );
 

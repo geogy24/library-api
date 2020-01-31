@@ -26,6 +26,8 @@ module.exports.show = ( request, response ) => {
 module.exports.delete = ( request, response ) => {
 	const id = request.params.id;
 
+	models.AuthorBook.destroy( { where: { authorId: id } } );
+
 	models.Author.destroy( {
 		where: { 
 			id: id

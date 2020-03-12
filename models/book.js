@@ -27,6 +27,13 @@ module.exports = ( sequelize, DataTypes ) => {
 			foreignKey: "bookId",
 			constraints: false
 		} );
+		Book.belongsToMany( models.User, {
+			through: {
+				model: models.Loan
+			},
+			foreignKey: "bookId",
+			constraints: false
+		} );
 	};
 	return Book;
 };

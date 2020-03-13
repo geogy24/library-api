@@ -5,7 +5,7 @@ var usersController = require( "../controllers/users.controller" );
 /**
  * List users
  * @route GET /users
- * @group User
+ * @group Users
  * @returns {object} 200 - An array of user info
  */
 router.get( "/", usersController.index );
@@ -13,7 +13,7 @@ router.get( "/", usersController.index );
 /**
  * Deletes a user
  * @route DELETE /users/:id
- * @group User
+ * @group Users
  * @param {string} id.query.required - User ID
  * @returns {object} 200
  * @returns {Error}  404 - Model not found
@@ -23,7 +23,7 @@ router.delete( "/:id", usersController.delete );
 /**
  * Show a required user
  * @route GET /users/:id
- * @group User
+ * @group Users
  * @param {string} id.query.required - User ID
  * @returns {object} 200 - An object of user info
  * @returns {object} 404 - Model not found
@@ -34,7 +34,7 @@ router.get( "/:id", usersController.show );
 /**
  * Update a user
  * @route PUT /users/:id
- * @group User
+ * @group Users
  * @param {string} id.query.required - User ID
  * @param {string} name.body.required - Name of the user
  * @param {string} surname.body.required - Surname of the user
@@ -48,7 +48,7 @@ router.put( "/:id", usersController.update );
 /**
  * Creates a user
  * @route POST /users
- * @group User
+ * @group Users
  * @param {string} name.body.required - Name
  * @param {string} surname.body.required - Surname
  * @param {string} password.body.required - Password

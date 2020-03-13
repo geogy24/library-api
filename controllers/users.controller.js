@@ -46,7 +46,7 @@ module.exports.create = ( request, response ) => {
 		name: user.name,
 		surname: user.surname,
 		email: user.email,
-		password: user.password
+		password: user.password,
 	} ).then( ( item ) => {
 		response.status( 201 ).json( usersSerializer.serialize( item ) );
 	} ).catch( () => {

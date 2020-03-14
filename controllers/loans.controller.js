@@ -7,7 +7,17 @@ module.exports.create = ( request, response ) => {
 		bookId: request.body.loan.book,
 		userId: request.body.loan.user
 	} ).then( ( item ) => {
-		response.status( 201 ).json( loansSerializer.serialize( item ) );
+		models.Loan.findAll( {
+			where: { id: item.id },
+			include: [ {
+				model: models.Book
+			},
+			{
+				model: models.User
+			} ]
+		} ).then( ( items ) => {
+			response.status( 201 ).json( loansSerializer.serialize( items ) );
+		} );
 	} ).catch( () => {
 		response.status( 500 ).json( errors.notCreateError() );
 	} );

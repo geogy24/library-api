@@ -19,7 +19,7 @@ describe( "#index", (  ) => {
 	it( "response 200 ok", async () => {
 		expect( response.statusCode ).toEqual( 200 );
 		body.forEach( el => {
-			expect( parseInt( el.id ) ).toEqual( author.dataValues.id );
+			expect( parseInt( el.id ) ).toBeGreaterThan( 0 );
 			expect( el.name ).toEqual( author.dataValues.name );
 		} );
 	} );

@@ -8,7 +8,9 @@ module.exports = ( sequelize, DataTypes ) => {
 			type: DataTypes.INTEGER
 		}
 	}, {} );
-	Loan.associate = function( ) {
+	Loan.associate = function( models ) {
+		Loan.belongsTo( models.Book, { foreignKey: "bookId", targetKey: "id" } );
+		Loan.belongsTo( models.User, { foreignKey: "userId", targetKey: "id" } );
 	};
 	return Loan;
 };

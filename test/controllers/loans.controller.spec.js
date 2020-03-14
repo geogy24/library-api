@@ -1,6 +1,5 @@
 const request = require( "supertest" );
 const app = require( "../../app" );
-const faker = require( "faker" );
 const userFactory = require( "../factories/user.factory" );
 const bookFactory = require( "../factories/book.factory" );
 const JSONAPIDeserializer = require( "jsonapi-serializer" ).Deserializer;

@@ -7,6 +7,8 @@ var indexRouter = require( "./routes/index" );
 var booksRouter = require( "./routes/books" );
 var subjectsRouter = require( "./routes/subjects" );
 var authorsRouter = require( "./routes/authors" );
+var usersRouter = require( "./routes/users" );
+var loansRouter = require( "./routes/loans" );
 
 var app = express(  );
 
@@ -28,6 +30,9 @@ app.use( "/", indexRouter );
 v1.use( "/books", booksRouter );
 v1.use( "/authors", authorsRouter );
 v1.use( "/subjects", subjectsRouter );
+v1.use( "/users", usersRouter );
+v1.use( "/loans", loansRouter );
+
 
 let options = {
 	swaggerDefinition: {

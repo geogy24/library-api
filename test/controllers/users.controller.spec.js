@@ -1,18 +1,18 @@
 const request = require( "supertest" );
 const app = require( "../../app" );
 const faker = require( "faker" );
-const authorFactory = require( "../factories/author.factory" );
+const userFactory = require( "../factories/user.factory" );
 const JSONAPIDeserializer = require( "jsonapi-serializer" ).Deserializer;
 const errors = require( "../../pojos/errors" );
 
 let response;
-let author;
+let user;
 let body;
 
 describe( "#index", (  ) => {
 	beforeEach( async (  ) => {
-		author = await authorFactory.create( "author" );
-		response = await request( app ).get( "/v1/authors" );
+		user = await userFactory.create( "user" );
+		response = await request( app ).get( "/v1/users" );
 		body = await new JSONAPIDeserializer().deserialize( response.body );
 	} );
 
@@ -20,7 +20,6 @@ describe( "#index", (  ) => {
 		expect( response.statusCode ).toEqual( 200 );
 		body.forEach( el => {
 			expect( parseInt( el.id ) ).toBeGreaterThan( 0 );
-			expect( el.name ).toEqual( author.dataValues.name );
 		} );
 	} );
 } );
@@ -28,21 +27,21 @@ describe( "#index", (  ) => {
 describe( "#show", (  ) => {
 	describe( "when object exist", () => {
 		beforeEach( async (  ) => {
-			author = await authorFactory.create( "author" );
-			response = await request( app ).get( `/v1/authors/${author.dataValues.id}` );
+			user = await userFactory.create( "user" );
+			response = await request( app ).get( `/v1/users/${user.dataValues.id}` );
 			body = await new JSONAPIDeserializer().deserialize( response.body );
 		} );
 
 		it( "response 200 ok", async () => {
 			expect( response.statusCode ).toEqual( 200 );
-			expect( parseInt( body.id ) ).toEqual( author.dataValues.id );
-			expect( body.name ).toEqual( author.dataValues.name );
+			expect( parseInt( body.id ) ).toEqual( user.dataValues.id );
+			expect( body.name ).toEqual( user.dataValues.name );
 		} );
 	} );
 
 	describe( "when object doesn't exist", () => {
 		beforeEach( async (  ) => {
-			response = await request( app ).get( `/v1/authors/${faker.random.number( )}` );
+			response = await request( app ).get( `/v1/users/${faker.random.number( )}` );
 		} );
 
 		it( "response 404 not found", async () => {
@@ -53,7 +52,7 @@ describe( "#show", (  ) => {
 
 	describe( "when send invalid data", () => {
 		beforeEach( async (  ) => {
-			response = await request( app ).get( `/v1/authors/${faker.lorem.word(  )}` );
+			response = await request( app ).get( `/v1/users/${faker.lorem.word(  )}` );
 		} );
 
 		it( "response 500 error", async () => {
@@ -66,8 +65,8 @@ describe( "#show", (  ) => {
 describe( "#delete", (  ) => {
 	describe( "when object exist", () => {
 		beforeEach( async (  ) => {
-			author = await authorFactory.create( "author" );
-			response = await request( app ).delete( `/v1/authors/${author.dataValues.id}` );
+			user = await userFactory.create( "user" );
+			response = await request( app ).delete( `/v1/users/${user.dataValues.id}` );
 		} );
 
 		it( "response 200 ok", async () => {
@@ -77,7 +76,7 @@ describe( "#delete", (  ) => {
 
 	describe( "when object doesn't exist", () => {
 		beforeEach( async (  ) => {
-			response = await request( app ).delete( `/v1/authors/${faker.lorem.word( )}` );
+			response = await request( app ).delete( `/v1/users/${faker.lorem.word( )}` );
 		} );
 
 		it( "response 404 not found", async () => {
@@ -88,23 +87,23 @@ describe( "#delete", (  ) => {
 } );
 
 describe( "#create", (  ) => {
-	describe( "when create author", () => {
+	describe( "when create user", () => {
 		beforeEach( async (  ) => {
-			author = await authorFactory.build( "author" );
-			response = await request( app ).post( "/v1/authors" ).send( { author: author.dataValues } );
+			user = await userFactory.build( "user" );
+			response = await request( app ).post( "/v1/users" ).send( { user: user.dataValues } );
 			body = await new JSONAPIDeserializer().deserialize( response.body );
 		} );
 
 		it( "response 201 created", async () => {
 			expect( response.statusCode ).toEqual( 201 );
-			expect( body.name ).toEqual( author.dataValues.name );
+			expect( body.name ).toEqual( user.dataValues.name );
 			expect( parseInt( body.id ) ).toBeGreaterThan( 0 );
 		} );
 	} );
 
 	describe( "when data is invalid", () => {
 		beforeEach( async (  ) => {
-			response = await request( app ).post( "/v1/authors" ).send( { author: {} } );
+			response = await request( app ).post( "/v1/users" ).send( { user: {} } );
 		} );
 
 		it( "response 500 error", async () => {
@@ -115,10 +114,10 @@ describe( "#create", (  ) => {
 } );
 
 describe( "#update", (  ) => {
-	describe( "when create author", () => {
+	describe( "when create user", () => {
 		beforeEach( async (  ) => {
-			author = await authorFactory.create( "author" );
-			response = await request( app ).put(  `/v1/authors/${author.dataValues.id}` ).send( { author: faker.lorem.words() } );
+			user = await userFactory.create( "user" );
+			response = await request( app ).put(  `/v1/users/${user.dataValues.id}` ).send( { user: faker.lorem.words() } );
 		} );
 
 		it( "response 200 ok", async () => {
@@ -126,9 +125,9 @@ describe( "#update", (  ) => {
 		} );
 	} );
 
-	describe( "when author does not exist", () => {
+	describe( "when user does not exist", () => {
 		beforeEach( async (  ) => {
-			response = await request( app ).put(  `/v1/authors/${faker.random.number()}` ).send( { author: { name: "" } } );
+			response = await request( app ).put(  `/v1/users/${faker.random.number()}` ).send( { user: { name: "" } } );
 		} );
 
 		it( "response 404 not found", async () => {

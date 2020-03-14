@@ -31,4 +31,10 @@ module.exports = {
 			title: "Can not update model error"
 		} );
 	},
+	unauthorized: () => {
+		return new JSONAPIError( {
+			code: "6",
+			title: "unauthorized"
+		} );
+	}
 };

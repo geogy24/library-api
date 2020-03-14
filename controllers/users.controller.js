@@ -1,4 +1,5 @@
 const bcrypt = require( "bcrypt" );
+var jwt = require( "jwt-simple" );
 
 var models = require( "../models" );
 var usersSerializer = require( "../serializers/users.serializer" );
@@ -65,5 +66,19 @@ module.exports.update = ( request, response ) => {
 		} );
 	} ).catch( () => {
 		response.status( 404 ).json( errors.notFoundError() );
+	} );
+};
+
+module.exports.session = ( request, response ) => {
+	models.User.findAll( {
+		where: {
+			email: request.body.email,
+			password: bcrypt.hashSync( request.body.password, 1 )
+		}
+	} ).then( item => {
+		let token = jwt.encode( item.dataValues, process.env.SECRET );
+		response.status( 200 ).json( { token: token } );
+	} ).catch( () => {
+		response.status( 404 ).json( errors.notFoundError() );		
 	} );
 };

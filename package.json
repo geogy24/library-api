@@ -21,7 +21,7 @@
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "eslint-plugin-jest": "^23.1.1",
-    "express": "^4.16.4",
+    "express": "^4.18.2",
     "factory-girl": "^5.0.4",
     "jsonapi-serializer": "^3.6.5",
     "morgan": "~1.9.1",
